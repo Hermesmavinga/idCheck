@@ -85,6 +85,13 @@
           class="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
           required
         />
+        <input
+          type="text"
+          id="newDestination"
+          placeholder="Destination"
+          class="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+          required
+        />
 
         <button
           type="submit"
@@ -95,15 +102,13 @@
       </form>
 
       <p class="mt-4">
-        <a href="rechercher.html" class="text-blue-600 underline"
-          >Aller à la recherche</a
-        >
+        <a href="index.html" class="text-blue-600 underline">Retour</a>
       </p>
     </div>
 
     <script>
       document.addEventListener("DOMContentLoaded", () => {
-        const ADMIN_PASSWORD = "monMotDePasseAdmin"; // Change ici ton mot de passe admin
+        const ADMIN_PASSWORD = "admin"; // Change ici ton mot de passe admin
 
         const contentDiv = document.getElementById("content");
         const accessDeniedDiv = document.getElementById("accessDenied");
@@ -127,6 +132,7 @@
           const newPhoneInput = document.getElementById("newPhone");
           const newTypeBilletInput = document.getElementById("newTypeBillet");
           const newPrixBilletInput = document.getElementById("newPrixBillet");
+          const newDestinationInput = document.getElementById("newDestination");
 
           let clients = {};
           if (localStorage.getItem("clients")) {
@@ -154,6 +160,7 @@
               numeroTelephone: newPhoneInput.value.trim(),
               typeBillet: newTypeBilletInput.value.trim(),
               prixBillet: newPrixBilletInput.value.trim(),
+              destination: newDestinationInput.value.trim(),
             };
 
             localStorage.setItem("clients", JSON.stringify(clients));

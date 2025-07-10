@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const clientPhone = document.getElementById("clientPhone");
   const clientTicketType = document.getElementById("clientTicketType");
   const clientPrice = document.getElementById("clientPrice");
+  const clientDestination = document.getElementById("clientDestination");
   const historiqueDiv = document.getElementById("historiqueDiv");
   const clearHistoryBtn = document.getElementById("clearHistoryBtn");
 
@@ -30,6 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
     clientPhone.textContent = client.numeroTelephone;
     clientTicketType.textContent = client.typeBillet;
     clientPrice.textContent = client.prixBillet;
+    clientDestination.textContent = client.destination || "-";
 
     resultDiv.classList.remove("hidden");
   }
