@@ -1,34 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Informations de Réservation</title>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Recherche de Réservation</title>
     <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="flex justify-center items-center min-h-screen bg-gray-100">
-
+  </head>
+  <body class="flex justify-center items-center min-h-screen bg-gray-100 py-10">
     <div class="bg-white p-6 rounded-lg shadow-lg w-96 text-center">
-        <h1 class="text-xl font-bold text-gray-800 mb-4">Recherche de Réservation</h1>
+      <h1 class="text-xl font-bold text-gray-800 mb-4">
+        Recherche de Réservation
+      </h1>
 
-        <form class="flex flex-col gap-4">
-            <input type="text" id="clientId" placeholder="Entrer l'ID du client" 
-                class="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+      <form class="flex flex-col gap-4" id="searchForm" onsubmit="return false">
+        <input
+          type="text"
+          id="clientId"
+          placeholder="Entrer le numéro de facture client"
+          class="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
 
-            <button type="button" id="searchBtn" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition">
-                Rechercher
-            </button>
-        </form>
+        <button
+          type="button"
+          id="searchBtn"
+          class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition"
+        >
+          Rechercher
+        </button>
+      </form>
 
-        <!-- Affichage des informations du client -->
-        <div id="result" class="mt-4 hidden bg-gray-50 p-4 rounded-md shadow-md">
-            <h2 class="text-lg font-semibold text-gray-800">Informations du Client</h2>
-            <p><strong>Nom :</strong> <span id="clientName"></span></p>
-            <p><strong>Email :</strong> <span id="clientEmail"></span></p>
-            <p><strong>Date de réservation :</strong> <span id="clientDate"></span></p>
-        </div>
+      <!-- Affichage des informations du client -->
+      <div
+        id="result"
+        class="mt-4 hidden bg-gray-50 p-4 rounded-md shadow-md text-left"
+      >
+        <h2 class="text-lg font-semibold text-gray-800 mb-2">
+          Informations du Client
+        </h2>
+
+        <p><strong>Nom :</strong> <span id="clientName"></span></p>
+        <p><strong>Email :</strong> <span id="clientEmail"></span></p>
+        <p>
+          <strong>Date de réservation :</strong> <span id="clientDate"></span>
+        </p>
+        <p>
+          <strong>Nom de la réservation :</strong>
+          <span id="clientReservation"></span>
+        </p>
+        <p>
+          <strong>Numéro de téléphone :</strong> <span id="clientPhone"></span>
+        </p>
+        <p>
+          <strong>Type de billet :</strong> <span id="clientTicketType"></span>
+        </p>
+        <p><strong>Prix du billet :</strong> <span id="clientPrice"></span></p>
+      </div>
+
+      <!-- Historique -->
+      <div id="historiqueDiv" class="mt-4 text-sm text-gray-600"></div>
+      <button
+        id="clearHistoryBtn"
+        class="mt-2 bg-red-500 text-white px-4 py-1 rounded-md hover:bg-red-600 transition"
+      >
+        Vider l’historique
+      </button>
+
+      <p class="mt-4">
+        <a href="ajouter.html" class="text-blue-600 underline"
+          >Ajouter une réservation</a
+        >
+      </p>
     </div>
 
     <script src="clients.js"></script>
-</body>
+  </body>
 </html>

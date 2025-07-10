@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ajouter une Réservation - Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      #content {
+        display: none;
+      }
+      #accessDenied {
+        display: none;
+        color: red;
+        font-weight: bold;
+        text-align: center;
+        margin-top: 2rem;
+      }
+    </style>
+  </head>
+  <body class="flex justify-center items-center min-h-screen bg-gray-100 py-10">
+    <div id="accessDenied">Accès refusé. Vous n’êtes pas autorisé.</div>
+
+    <div
+      id="content"
+      class="bg-white p-6 rounded-lg shadow-lg w-96 text-center"
+    >
+      <h1 class="text-xl font-bold text-gray-800 mb-4">
+        Ajouter une Nouvelle Réservation
+      </h1>
+
+      <form id="addReservationForm" class="flex flex-col gap-3 text-left">
+        <input
+          type="number"
+          id="newId"
+          placeholder="ID client (nombre)"
+          class="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+          required
+        />
+        <input
+          type="text"
+          id="newNom"
+          placeholder="Nom client"
+          class="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+          required
+        />
+        <input
+          type="email"
+          id="newEmail"
+          placeholder="Email client"
+          class="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+          required
+        />
+        <input
+          type="date"
+          id="newDate"
+          class="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+          required
+        />
+        <input
+          type="text"
+          id="newNomReservation"
+          placeholder="Nom de la réservation"
+          class="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+          required
+        />
+        <input
+          type="tel"
+          id="newPhone"
+          placeholder="Numéro de téléphone"
+          class="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+          required
+        />
+        <input
+          type="text"
+          id="newTypeBillet"
+          placeholder="Type de billet"
+          class="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+          required
+        />
+        <input
+          type="text"
+          id="newPrixBillet"
+          placeholder="Prix du billet (ex: 120 $)"
+          class="p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+          required
+        />
+
+        <button
+          type="submit"
+          class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition"
+        >
+          Ajouter Réservation
+        </button>
+      </form>
+
+      <p class="mt-4">
+        <a href="rechercher.html" class="text-blue-600 underline"
+          >Aller à la recherche</a
+        >
+      </p>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const ADMIN_PASSWORD = "monMotDePasseAdmin"; // Change ici ton mot de passe admin
+
+        const contentDiv = document.getElementById("content");
+        const accessDeniedDiv = document.getElementById("accessDenied");
+
+        const userPass = prompt(
+          "Veuillez entrer le mot de passe administrateur :"
+        );
+
+        if (userPass === ADMIN_PASSWORD) {
+          contentDiv.style.display = "block";
+          accessDeniedDiv.style.display = "none";
+
+          const addReservationForm =
+            document.getElementById("addReservationForm");
+          const newIdInput = document.getElementById("newId");
+          const newNomInput = document.getElementById("newNom");
+          const newEmailInput = document.getElementById("newEmail");
+          const newDateInput = document.getElementById("newDate");
+          const newNomReservationInput =
+            document.getElementById("newNomReservation");
+          const newPhoneInput = document.getElementById("newPhone");
+          const newTypeBilletInput = document.getElementById("newTypeBillet");
+          const newPrixBilletInput = document.getElementById("newPrixBillet");
+
+          let clients = {};
+          if (localStorage.getItem("clients")) {
+            clients = JSON.parse(localStorage.getItem("clients"));
+          }
+
+          addReservationForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const newId = newIdInput.value.trim();
+            if (!newId || isNaN(newId)) {
+              alert("Veuillez saisir un ID valide (nombre).");
+              return;
+            }
+            if (clients[newId]) {
+              alert("Cet ID existe déjà !");
+              return;
+            }
+
+            clients[newId] = {
+              nomClient: newNomInput.value.trim(),
+              email: newEmailInput.value.trim(),
+              dateReservation: newDateInput.value,
+              nomReservation: newNomReservationInput.value.trim(),
+              numeroTelephone: newPhoneInput.value.trim(),
+              typeBillet: newTypeBilletInput.value.trim(),
+              prixBillet: newPrixBilletInput.value.trim(),
+            };
+
+            localStorage.setItem("clients", JSON.stringify(clients));
+            alert("Nouvelle réservation ajoutée avec succès !");
+            addReservationForm.reset();
+          });
+        } else {
+          contentDiv.style.display = "none";
+          accessDeniedDiv.style.display = "block";
+        }
+      });
+    </script>
+  </body>
+</html>
